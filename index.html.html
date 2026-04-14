@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Профориентация 9 класс | Воронежские колледжи</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+background: linear-gradient(145deg, #f5f7fa 0%, #e9edf5 100%);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 24px;
+}
+
+.card {
+max-width: 950px;
+width: 100%;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(12px);
+border-radius: 48px;
+box-shadow: 0 25px 45px -12px rgba(0, 20, 60, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+padding: 36px 40px;
+border: 1px solid rgba(255, 255, 255, 0.5);
+transition: all 0.2s ease;
+}
+
+h1 {
+font-size: 2.6rem;
+font-weight: 700;
+letter-spacing: -0.01em;
+background: linear-gradient(135deg, #1a2e4d, #1e4b7a);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+margin-bottom: 6px;
+}
+
+.subhead {
+font-size: 1.1rem;
+color: #3e5470;
+margin-bottom: 28px;
+border-left: 5px solid #3a7ca5;
+padding-left: 20px;
+font-weight: 400;
+}
+
+.progress-container {
+margin-bottom: 32px;
+}
+
+.progress-bar {
+width: 100%;
+height: 10px;
+background: #d9e2ec;
+border-radius: 40px;
+overflow: hidden;
+box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.progress-fill {
+height: 10px;
+width: 0%;
+background: linear-gradient(90deg, #2b6c9e, #4aa3d1);
+border-radius: 40px;
+transition: width 0.3s ease;
+}
+
+.step-indicator {
+display: flex;
+justify-content: space-between;
+margin-top: 8px;
+font-size: 0.9rem;
+color: #3a5e7a;
+font-weight: 500;
+}
+
+.question-box {
+margin-bottom: 36px;
+}
+
+.question {
+font-size: 1.7rem;
+font-weight: 600;
+color: #0b1e2c;
+margin-bottom: 26px;
+line-height: 1.3;
+}
+
+.options-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 14px;
+}
+
+.option-btn {
+background: white;
+border: 1.5px solid #cbd6e3;
+border-radius: 60px;
+padding: 18px 22px;
+font-size: 1.1rem;
+font-weight: 500;
+color: #1f3a54;
+text-align: left;
+cursor: pointer;
+transition: all 0.15s;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+backdrop-filter: blur(4px);
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.option-btn:hover {
+background: #ecf3fa;
+border-color: #7ba9cc;
+box-shadow: 0 8px 14px -8px rgba(36, 94, 145, 0.2);
+transform: translateY(-1px);
+}
+
+.option-btn.selected {
+background: #1f4b72;
+border-color: #1f4b72;
+color: white;
+box-shadow: 0 8px 16px -6px #1f4b7260;
+}
+
+.option-btn.selected .prefix {
+color: #ffdb9c;
+}
+
+.prefix {
+font-weight: 700;
+font-size: 1.3rem;
+min-width: 32px;
+color: #2b6c9e;
+}
+
+.nav-buttons {
+display: flex;
+justify-content: space-between;
+margin-top: 30px;
+}
+
+.btn {
+background: white;
+border: 1px solid #b6c9db;
+padding: 14px 34px;
+border-radius: 60px;
+font-size: 1.1rem;
+font-weight: 600;
+color: #1f3a54;
+cursor: pointer;
+transition: 0.15s;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+backdrop-filter: blur(4px);
+}
+
+.btn-primary {
+background: #1f4b72;
+border: 1px solid #1f4b72;
+color: white;
+box-shadow: 0 10px 20px -8px #1f4b72a0;
+}
+
+.btn-primary:hover {
+background: #1a3e5e;
+transform: scale(0.98);
+}
+
+.btn:disabled {
+opacity: 0.4;
+pointer-events: none;
+filter: grayscale(0.3);
+}
+
+.result-screen {
+text-align: center;
+padding: 20px 0 10px;
+}
+
+.result-badge {
+background: #e6f0f9;
+border-radius: 100px;
+padding: 14px 28px;
+display: inline-block;
+margin-bottom: 24px;
+font-weight: 600;
+color: #153e5a;
+}
+
+.profession-title {
+font-size: 3rem;
+font-weight: 800;
+background: linear-gradient(145deg, #103247, #2a6285);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+margin: 20px 0 10px;
+}
+
+.description {
+font-size: 1.3rem;
+color: #1f3a4e;
+margin-bottom: 30px;
+}
+
+.recommend-list {
+text-align: left;
+background: #f4f9ff;
+padding: 24px 30px;
+border-radius: 36px;
+margin: 24px 0;
+}
+
+.college-card {
+background: white;
+border-radius: 20px;
+padding: 18px 20px;
+margin-bottom: 12px;
+border-left: 5px solid #2b6c9e;
+box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.college-name {
+font-weight: 700;
+font-size: 1.2rem;
+color: #103247;
+}
+
+.college-spec {
+color: #3e5470;
+margin: 5px 0;
+}
+
+.restart-btn {
+background: #e1e9f2;
+border: none;
+margin-top: 10px;
+}
+
+.footer-note {
+margin-top: 24px;
+color: #6b85a0;
+font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+.card { padding: 24px 18px; }
+h1 { font-size: 2rem; }
+.options-grid { grid-template-columns: 1fr; }
+.question { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+<div class="card" id="appContainer">
+<!-- динамическое содержимое -->
+</div>
+
+<script>
+(function(){
+"use strict";
+
+// ---------- ПРОФОРИЕНТАЦИОННЫЙ ТЕСТ (9 КЛАСС) 20 ВОПРОСОВ ----------
+const categories = {
+TECH: 'Технический',
+SCIENCE: 'Естественно-научный',
+HUMAN: 'Гуманитарный',
+SOCIAL: 'Социальный',
+CREATIVE: 'Творческий',
+BUSINESS: 'Предпринимательский'
+};
+
+// База данных колледжей Воронежа (информация собрана из открытых источников)
+const collegesDatabase = {
+TECH: [
+{
+name: "Воронежский политехнический техникум",
+specs: "Техническое обслуживание автотранспорта, IT, программирование, автоматизация",
+note: "325 бюджетных мест, проходной балл от 3.9 [citation:4]"
+},
+{
+name: "Воронежский техникум пищевой и перерабатывающей промышленности",
+specs: "Технология продукции, поварское дело, оборудование пищевых производств",
+note: "175 бюджетных мест [citation:4]"
+},
+{
+name: "Строительно-политехнический колледж ВГТУ",
+specs: "Строительство, эксплуатация зданий, техническая эксплуатация оборудования",
+note: "При Воронежском государственном техническом университете [citation:5]"
+},
+{
+name: "Воронежский государственный промышленно-экономический колледж (ВГПЭК)",
+specs: "Автоматизация, техническая эксплуатация, промышленное оборудование",
+note: "Государственный, бюджетные места, от 63000 ₽/год [citation:2]"
+}
+],
+SCIENCE: [
+{
+name: "Воронежский базовый медицинский колледж",
+specs: "Сестринское дело, лечебное дело, фармация, лабораторная диагностика",
+note: "Ведущий медколледж региона, бюджетные места"
+},
+{
+name: "Воронежский государственный промышленно-гуманитарный колледж",
+specs: "Технология аналитического контроля, химические технологии",
+note: "Есть направления, связанные с лабораторным анализом"
+},
+{
+name: "Колледж Воронежского государственного университета (ВГУ)",
+specs: "Прикладная информатика, естественно-научные дисциплины",
+note: "После 9 класса — IT и аналитика [citation:7]"
+}
+],
+HUMAN: [
+{
+name: "Воронежский юридический техникум",
+specs: "Юриспруденция, правоохранительная деятельность, документоведение",
+note: "150 бюджетных мест, проходной балл от 4.6 [citation:4]"
+},
+{
+name: "Воронежское областное училище культуры им. Суворина",
+specs: "Библиотечно-информационная деятельность, социально-культурная работа",
+note: "Бесплатное обучение, очно и заочно [citation:8]"
+},
+{
+name: "Колледж ВГУ (гуманитарные направления)",
+specs: "Реклама, издательское дело, туризм",
+note: "После 9 класса, бюджет [citation:7]"
+}
+],
+SOCIAL: [
+{
+name: "Воронежский государственный промышленно-гуманитарный колледж",
+specs: "Социальная работа, педагогика дополнительного образования",
+note: "Бюджетные места"
+},
+{
+name: "Воронежское областное училище культуры им. Суворина",
+specs: "Социально-культурная деятельность, менеджмент в соцсфере",
+note: "Бесплатно, квалификация «Менеджер» [citation:8]"
+},
+{
+name: "Губернский педагогический колледж",
+specs: "Преподавание в начальных классах, дошкольное образование, физкультура",
+note: "Ведущий педколледж региона, бюджетные места"
+}
+],
+CREATIVE: [
+{
+name: "Воронежское художественное училище (техникум) им. Н.Н. Ге",
+specs: "Живопись, дизайн, декоративно-прикладное искусство",
+note: "16 бюджетных мест, от 103 510 ₽/год, творческие экзамены [citation:9]"
+},
+{
+name: "Воронежский музыкальный колледж им. Ростроповичей",
+specs: "Эстрадное пение, инструментальное исполнительство, хоровое дирижирование",
+note: "Бюджет, проходной балл от 4.3-4.4 [citation:3]"
+},
+{
+name: "Воронежское областное училище культуры им. Суворина",
+specs: "Народное художественное творчество, фото- и видеотворчество, театральное",
+note: "Бесплатное обучение [citation:8]"
+}
+],
+BUSINESS: [
+{
+name: "Воронежский государственный промышленно-экономический колледж (ВГПЭК)",
+specs: "Экономика, бухучет, предпринимательство, коммерция",
+note: "Бюджет, от 63 000 ₽/год [citation:2]"
+},
+{
+name: "Воронежский юридический техникум",
+specs: "Экономика и бухгалтерский учет, управление",
+note: "Бюджетные места [citation:4]"
+},
+{
+name: "Колледж ВГУ",
+specs: "Банковское дело, логистика, реклама, экономика",
+note: "После 9 класса, бюджет [citation:7]"
+},
+{
+name: "Воронежский политехнический техникум",
+specs: "Организация перевозок и управление, менеджмент",
+note: "325 бюджетных мест [citation:4]"
+}
+]
+};
+
+// Расширенный массив из 20 вопросов
+const questions = [
+// 1-5
+{
+text: "Какое занятие тебе ближе?",
+options: [
+{ text: "Собирать / разбирать механизмы, программировать", weights: { TECH: 3, SCIENCE: 1 } },
+{ text: "Проводить опыты, изучать природу", weights: { SCIENCE: 3, TECH: 1 } },
+{ text: "Читать, писать сочинения, изучать языки", weights: { HUMAN: 3, SOCIAL: 1 } },
+{ text: "Общаться с людьми, помогать, обучать", weights: { SOCIAL: 3, HUMAN: 1 } }
+]
+},
+{
+text: "Какую задачу ты бы выбрал на олимпиаде?",
+options: [
+{ text: "Сложная математическая / физическая задача", weights: { TECH: 3, SCIENCE: 2 } },
+{ text: "Исследование экосистемы или химический анализ", weights: { SCIENCE: 3, TECH: 1 } },
+{ text: "Анализ исторического события или написание эссе", weights: { HUMAN: 3, SOCIAL: 1 } },
+{ text: "Разработка бизнес-проекта или дебаты", weights: { BUSINESS: 3, SOCIAL: 2 } }
+]
+},
+{
+text: "Твой идеальный рабочий инструмент?",
+options: [
+{ text: "Компьютер, чертежи, 3D-принтер", weights: { TECH: 3, CREATIVE: 1 } },
+{ text: "Микроскоп, лабораторное оборудование", weights: { SCIENCE: 3 } },
+{ text: "Книги, блокнот, словари", weights: { HUMAN: 3, CREATIVE: 1 } },
+{ text: "Люди, команда, умение договариваться", weights: { SOCIAL: 3, BUSINESS: 2 } }
+]
+},
+{
+text: "Какую сферу деятельности ты считаешь наиболее значимой?",
+options: [
+{ text: "Инженерия, IT, изобретения", weights: { TECH: 3 } },
+{ text: "Медицина, биология, экология", weights: { SCIENCE: 3, SOCIAL: 1 } },
+{ text: "Искусство, медиа, дизайн", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Предпринимательство, управление, экономика", weights: { BUSINESS: 3, SOCIAL: 1 } }
+]
+},
+{
+text: "Что лучше всего описывает твой характер?",
+options: [
+{ text: "Люблю точность и логику, анализирую", weights: { TECH: 2, SCIENCE: 2 } },
+{ text: "Эмпатичный, люблю помогать и объяснять", weights: { SOCIAL: 3, HUMAN: 1 } },
+{ text: "Креативный, люблю создавать новое", weights: { CREATIVE: 3, BUSINESS: 1 } },
+{ text: "Целеустремленный, умею убеждать", weights: { BUSINESS: 3, SOCIAL: 1 } }
+]
+},
+// 6 вопрос - Контент в соцсетях
+{
+text: "Какой контент в социальных сетях ты смотришь чаще всего?",
+options: [
+{ text: "📱 Обзоры техники, гайды по ремонту, IT-новости", weights: { TECH: 3, SCIENCE: 1 } },
+{ text: "🔬 Научно-популярные ролики, эксперименты, факты", weights: { SCIENCE: 3, TECH: 1 } },
+{ text: "🎨 Творческие блоги, искусство, дизайн, киноразборы", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "💼 Бизнес-кейсы, психология, лайфстайл успешных людей", weights: { BUSINESS: 3, SOCIAL: 2 } }
+]
+},
+// 7-20
+{
+text: "Как ты обычно проводишь свободное время?",
+options: [
+{ text: "Чиню технику, собираю модели, копаюсь в настройках", weights: { TECH: 3 } },
+{ text: "Смотрю научпоп, читаю про открытия, экспериментирую", weights: { SCIENCE: 3 } },
+{ text: "Рисую, пишу стихи, монтирую видео", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Встречаюсь с друзьями, организую мероприятия", weights: { SOCIAL: 3, BUSINESS: 1 } }
+]
+},
+{
+text: "Какая школьная дисциплина даётся тебе легче всего?",
+options: [
+{ text: "Математика, физика, информатика", weights: { TECH: 3, SCIENCE: 1 } },
+{ text: "Биология, химия, география", weights: { SCIENCE: 3 } },
+{ text: "Русский, литература, история", weights: { HUMAN: 3, SOCIAL: 1 } },
+{ text: "Обществознание, экономика", weights: { BUSINESS: 2, SOCIAL: 2 } }
+]
+},
+{
+text: "Представь, что ты выиграл грант на свой проект. Что это за проект?",
+options: [
+{ text: "Разработка полезного приложения или гаджета", weights: { TECH: 3, BUSINESS: 1 } },
+{ text: "Экологическая лаборатория или исследование", weights: { SCIENCE: 3, SOCIAL: 1 } },
+{ text: "Создание фильма, выставки или музыкального альбома", weights: { CREATIVE: 3 } },
+{ text: "Открытие клуба по интересам или волонтёрского центра", weights: { SOCIAL: 3, BUSINESS: 2 } }
+]
+},
+{
+text: "В командной работе ты чаще всего:",
+options: [
+{ text: "Отвечаю за техническую часть и расчёты", weights: { TECH: 3 } },
+{ text: "Анализирую данные и ищу закономерности", weights: { SCIENCE: 3, TECH: 1 } },
+{ text: "Генерирую идеи и придумываю оформление", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Организую процесс, распределяю задачи, мотивирую", weights: { BUSINESS: 3, SOCIAL: 2 } }
+]
+},
+{
+text: "Какая обстановка для работы тебе по душе?",
+options: [
+{ text: "Тихий кабинет с чертежами и схемами", weights: { TECH: 2, SCIENCE: 2 } },
+{ text: "Лаборатория с приборами и образцами", weights: { SCIENCE: 3 } },
+{ text: "Уютная студия с красками, книгами, музыкой", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Офис open-space, где кипит обсуждение", weights: { BUSINESS: 2, SOCIAL: 2 } }
+]
+},
+{
+text: "Что тебе интереснее смотреть на YouTube?",
+options: [
+{ text: "Обзоры техники, гайды по программированию, DIY-электроника", weights: { TECH: 3 } },
+{ text: "Научные каналы (химия, физика, космос, медицина)", weights: { SCIENCE: 3 } },
+{ text: "Уроки рисования, разборы фильмов, каналы про искусство", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Бизнес-интервью, лекции по психологии общения", weights: { BUSINESS: 2, SOCIAL: 2 } }
+]
+},
+{
+text: "Тебе предложили подработку на лето. Что выберешь?",
+options: [
+{ text: "Помощник системного администратора / мастера по ремонту", weights: { TECH: 3 } },
+{ text: "Лаборант в школе или помощник в ветеринарной клинике", weights: { SCIENCE: 3, SOCIAL: 1 } },
+{ text: "Аниматор, вожатый, помощник организатора", weights: { SOCIAL: 3, CREATIVE: 1 } },
+{ text: "Работа с документами, помощь в небольшом бизнесе", weights: { BUSINESS: 2, HUMAN: 1 } }
+]
+},
+{
+text: "Какая фраза больше про тебя?",
+options: [
+{ text: "«Семь раз отмерь — один раз отрежь»", weights: { TECH: 2, SCIENCE: 2 } },
+{ text: "«Через тернии к звёздам»", weights: { SCIENCE: 2, BUSINESS: 1 } },
+{ text: "«Красота спасёт мир»", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "«Один в поле не воин»", weights: { SOCIAL: 3, BUSINESS: 1 } }
+]
+},
+{
+text: "Какую книгу (или жанр) ты бы взял с собой в дорогу?",
+options: [
+{ text: "Научная фантастика, технический справочник", weights: { TECH: 2, SCIENCE: 1 } },
+{ text: "Научно-популярная литература о природе", weights: { SCIENCE: 3 } },
+{ text: "Классический роман или сборник стихов", weights: { HUMAN: 3, CREATIVE: 1 } },
+{ text: "Книга по саморазвитию, биография успешного человека", weights: { BUSINESS: 2, SOCIAL: 1 } }
+]
+},
+{
+text: "Что бы ты улучшил в своей школе в первую очередь?",
+options: [
+{ text: "Компьютерный класс и оборудование в мастерских", weights: { TECH: 3 } },
+{ text: "Лаборатории для опытов по физике/химии/биологии", weights: { SCIENCE: 3 } },
+{ text: "Актовый зал, студию для творчества, библиотеку", weights: { CREATIVE: 2, HUMAN: 2 } },
+{ text: "Систему самоуправления, коворкинг-зону для общения", weights: { SOCIAL: 3, BUSINESS: 2 } }
+]
+},
+{
+text: "С каким утверждением ты согласен больше всего?",
+options: [
+{ text: "Мир держится на технологиях и инженерах", weights: { TECH: 3 } },
+{ text: "Прогресс невозможен без научных открытий", weights: { SCIENCE: 3 } },
+{ text: "Важно сохранять культуру и создавать искусство", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Главное — люди и отношения между ними", weights: { SOCIAL: 3, BUSINESS: 1 } }
+]
+},
+{
+text: "Какой вид спорта или активности тебе ближе?",
+options: [
+{ text: "Шахматы, киберспорт, моделирование", weights: { TECH: 2, SCIENCE: 1 } },
+{ text: "Плавание, лёгкая атлетика — для ясности ума", weights: { SCIENCE: 1, SOCIAL: 1 } },
+{ text: "Танцы, театральная студия, фотокросс", weights: { CREATIVE: 3, SOCIAL: 1 } },
+{ text: "Командные игры (футбол, волейбол), организация турниров", weights: { SOCIAL: 3, BUSINESS: 2 } }
+]
+},
+{
+text: "Кем из известных личностей ты восхищаешься больше?",
+options: [
+{ text: "Илон Маск, Стив Джобс, Сергей Королёв", weights: { TECH: 3, BUSINESS: 1 } },
+{ text: "Мария Склодовская-Кюри, Дмитрий Менделеев", weights: { SCIENCE: 3 } },
+{ text: "Фёдор Достоевский, Пабло Пикассо, Андрей Тарковский", weights: { CREATIVE: 3, HUMAN: 2 } },
+{ text: "Мать Тереза, Мартин Лютер Кинг, известные психологи", weights: { SOCIAL: 3, HUMAN: 1 } }
+]
+},
+{
+text: "Что для тебя важнее в будущей работе?",
+options: [
+{ text: "Чёткие задачи, стабильность, возможность создавать руками/кодом", weights: { TECH: 2, SCIENCE: 1 } },
+{ text: "Постоянное обучение, исследования, открытия", weights: { SCIENCE: 3 } },
+{ text: "Свобода самовыражения, нестандартный график", weights: { CREATIVE: 3, HUMAN: 1 } },
+{ text: "Общение с разными людьми, карьерный рост, доход", weights: { BUSINESS: 3, SOCIAL: 2 } }
+]
+}
+];
+
+// Рекомендации по профилям
+const recommendations = {
+TECH: {
+title: "👨‍💻 Технический профиль",
+description: "Инженер, программист, робототехник, проектировщик.",
+details: "Тебе интересно, как всё устроено. Рекомендуем углублённую математику, физику, информатику."
+},
+SCIENCE: {
+title: "🔬 Естественно-научный профиль",
+description: "Биолог, химик, врач, эколог, фармацевт.",
+details: "Ты любознателен к природе и экспериментам. Подойдут химико-биологические классы, медицинские колледжи."
+},
+HUMAN: {
+title: "📚 Гуманитарный профиль",
+description: "Филолог, журналист, юрист, историк, переводчик.",
+details: "Тебе близки тексты, языки, культура. Обрати внимание на гуманитарные гимназии, юридические направления."
+},
+SOCIAL: {
+title: "🤝 Социально-педагогический профиль",
+description: "Психолог, педагог, социальный работник, HR.",
+details: "Ты умеешь находить подход к людям. Рассмотри педагогические колледжи, психологические направления."
+},
+CREATIVE: {
+title: "🎨 Творческий профиль",
+description: "Дизайнер, архитектор, музыкант, режиссёр, художник.",
+details: "Ты видишь мир в красках и образах. Творческие училища, колледжи искусств — твой путь."
+},
+BUSINESS: {
+title: "📈 Предпринимательский профиль",
+description: "Менеджер, маркетолог, экономист, предприниматель.",
+details: "Тебе интересно управление и проекты. Рекомендуем социально-экономические классы, бизнес-колледжи."
+}
+};
+
+// ---------- СОСТОЯНИЕ ----------
+let currentStep = 0;
+let answers = new Array(questions.length).fill(null);
+let scores = {
+TECH: 0, SCIENCE: 0, HUMAN: 0, SOCIAL: 0, CREATIVE: 0, BUSINESS: 0
+};
+let finished = false;
+const container = document.getElementById('appContainer');
+
+function calculateScores() {
+Object.keys(scores).forEach(k => scores[k] = 0);
+for (let qIdx = 0; qIdx < questions.length; qIdx++) {
+const answerIdx = answers[qIdx];
+if (answerIdx === null) continue;
+const weights = questions[qIdx].options[answerIdx].weights;
+for (let cat in weights) {
+if (scores.hasOwnProperty(cat)) {
+scores[cat] += weights[cat];
+}
+}
+}
+}
+
+function getTopCategory() {
+let maxScore = -1;
+let topCat = 'TECH';
+for (let cat in scores) {
+if (scores[cat] > maxScore) {
+maxScore = scores[cat];
+topCat = cat;
+}
+}
+return topCat;
+}
+
+function allQuestionsAnswered() {
+return answers.every(idx => idx !== null);
+}
+
+function render() {
+if (finished) {
+renderResultScreen();
+return;
+}
+if (allQuestionsAnswered()) {
+finished = true;
+calculateScores();
+renderResultScreen();
+return;
+}
+renderQuestionScreen();
+}
+
+function renderQuestionScreen() {
+const q = questions[currentStep];
+const selectedIdx = answers[currentStep];
+const progressPercent = ((currentStep) / questions.length) * 100;
+
+let optionsHtml = '';
+q.options.forEach((opt, idx) => {
+const letter = String.fromCharCode(65 + idx);
+const selectedClass = (selectedIdx === idx) ? 'selected' : '';
+optionsHtml += `<div class="option-btn ${selectedClass}" data-option-index="${idx}"><span class="prefix">${letter}</span> ${opt.text}</div>`;
+});
+
+const isFirst = currentStep === 0;
+const isLast = currentStep === questions.length - 1;
+const nextDisabled = (selectedIdx === null);
+
+container.innerHTML = `
+<h1>🔍 ПрофНавигатор 9</h1>
+<div class="subhead">Анкетирование (20 вопросов) + колледжи Воронежа</div>
+<div class="progress-container">
+<div class="progress-bar"><div class="progress-fill" style="width: ${progressPercent}%;"></div></div>
+<div class="step-indicator"><span>Вопрос ${currentStep+1} из ${questions.length}</span><span>📋 ${Math.round(progressPercent)}%</span></div>
+</div>
+<div class="question-box">
+<div class="question">${q.text}</div>
+<div class="options-grid" id="optionsContainer">${optionsHtml}</div>
+</div>
+<div class="nav-buttons">
+<button class="btn" id="prevBtn" ${isFirst ? 'disabled' : ''}>← Назад</button>
+<button class="btn btn-primary" id="nextBtn" ${nextDisabled ? 'disabled' : ''}>${isLast ? 'Завершить 🎯' : 'Далее →'}</button>
+</div>
+<div class="footer-note">Выбери вариант, который больше всего отражает твои интересы</div>
+`;
+
+document.querySelectorAll('.option-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+answers[currentStep] = parseInt(btn.dataset.optionIndex);
+render();
+});
+});
+document.getElementById('prevBtn')?.addEventListener('click', () => { currentStep--; render(); });
+document.getElementById('nextBtn')?.addEventListener('click', () => {
+if (selectedIdx !== null) {
+if (currentStep < questions.length - 1) { currentStep++; render(); }
+else { if (allQuestionsAnswered()) { finished = true; calculateScores(); render(); } }
+}
+});
+}
+
+function renderResultScreen() {
+calculateScores();
+const topCat = getTopCategory();
+const rec = recommendations[topCat];
+const colleges = collegesDatabase[topCat] || collegesDatabase.TECH;
+
+let collegesHtml = '';
+colleges.forEach(c => {
+collegesHtml += `<div class="college-card"><div class="college-name">${c.name}</div><div class="college-spec">${c.specs}</div><div style="font-size:0.9rem; color:#5a7a9a;">${c.note}</div></div>`;
+});
+
+const scoreRows = Object.entries(scores)
+.map(([cat, val]) => `<span style="display:inline-block; margin:5px 10px;"><strong>${categories[cat]}:</strong> ${val}</span>`).join('');
+
+container.innerHTML = `
+<div class="result-screen">
+<div class="result-badge">✨ Твой профиль ✨</div>
+<div class="profession-title">${rec.title}</div>
+<div class="description">${rec.description}</div>
+<div class="recommend-list">
+<h3 style="margin-bottom: 16px; font-weight: 600;">📌 Рекомендации</h3>
+<p style="font-size: 1.2rem; margin-bottom: 20px;">${rec.details}</p>
+
+<h3 style="margin: 24px 0 16px; font-weight: 600;">🏫 Колледжи Воронежа для твоего профиля</h3>
+${collegesHtml}
+
+<div style="background: #ffffffb0; border-radius: 30px; padding: 16px; margin-top: 20px;">
+<p style="font-weight:500;">🧮 Баллы по направлениям:</p>
+<div>${scoreRows}</div>
+</div>
+<p style="margin-top: 22px; font-style: italic;">Помни: это ориентир. Уточняй условия поступления на сайтах колледжей!</p>
+</div>
+<button class="btn restart-btn" id="restartBtn">🔄 Пройти анкету заново</button>
+<div class="footer-note">Анкета для учащихся 9 класса · Профориентация 2026</div>
+</div>
+`;
+document.getElementById('restartBtn').addEventListener('click', () => {
+currentStep = 0;
+answers = new Array(questions.length).fill(null);
+finished = false;
+Object.keys(scores).forEach(k => scores[k] = 0);
+render();
+});
+}
+
+render();
+})();
+</script>
+</body>
+</html>
